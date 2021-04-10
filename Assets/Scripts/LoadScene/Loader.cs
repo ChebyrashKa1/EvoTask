@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Loader : MonoBehaviour
 {
-    //[SerializeField] private  leaderboard
-
     private void Start()
     {
         

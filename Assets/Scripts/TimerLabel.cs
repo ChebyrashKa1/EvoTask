@@ -6,8 +6,8 @@ public class TimerLabel : MonoBehaviour
 {
     [SerializeField] private TMPro.TMP_Text txtTimer;
 
-    public void UpdateTimer()
+    public void UpdateTimer(string setTimer)
     {
-        txtTimer.SetText("timer");
+        txtTimer.SetText(setTimer);
     }
 }

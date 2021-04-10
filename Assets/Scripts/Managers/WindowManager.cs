@@ -60,11 +60,16 @@ public class WindowManager : Singleton<WindowManager>
         return null;
     }
 
-
+    #region Open Windows
     public void OpenPauseWindow()
+    {
+        GameCore.windows.OpenWindow<PauseWindow>();
+    }
+    public void OpenBestScoreWindow()
     {
         GameCore.windows.OpenWindow<BestScoreWindow>();
     }
+    #endregion
 }
 
 public interface IWindow

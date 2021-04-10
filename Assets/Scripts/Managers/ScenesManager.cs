@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ScenesManager : Singleton<ScenesManager>
+public class ScenesManager : ASingleton<ScenesManager>
 {
-    private void Start()
-    {       
-        DontDestroyOnLoad(transform.gameObject);
-    }
-
     public void LoadNewScene(int index)
     {
         SceneManager.LoadScene(index);
