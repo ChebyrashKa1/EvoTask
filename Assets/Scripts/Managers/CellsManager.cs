@@ -5,11 +5,14 @@ using System.Linq;
 
 public class CellsManager : Singleton<CellsManager>
 {
-    [SerializeField] private RectTransform grid;
     [SerializeField] private List<Cell> allCells;
+    [SerializeField] private TimerLabel mainTimer;
 
+
+    private List<CellData> tempCells;
     private Cell firstSelected;
     private Cell secondSelected;
+    private static int timeGame = 60;
 
     public Cell FirstSelected { get => firstSelected; set => firstSelected = value; }
     public Cell SecondSelected { get => secondSelected; set => secondSelected = value; }
@@ -18,50 +21,35 @@ public class CellsManager : Singleton<CellsManager>
     private void Start()
     {
         InitCells();
+        mainTimer.UpdateStaticTime(timeGame);
         StartCoroutine(TwoSecondRotate());
     }
 
-    private void InitCells()
+    private void InitTimer()
+    {
+        //mainTimer.UpdateStaticTime(timeGame);
+        mainTimer.StartTimer(timeGame, () => { GameCore.windows.OpenWindow<GameOverWindow>(); }); // окно проигрыша при конце времени
+    }
+
+    private void InitCells() //init sort 
     {
         var cellTypesList = GameCore.enumUtils.GetValues<CellType>();
 
+        tempCells = new List<CellData>(allCells.Count);
         for (int i = 0; i < allCells.Count; i++)
         {
             var type = cellTypesList[(int)(i * 0.5f)];
-            allCells[i].InitCell(type);
+            tempCells.Add(new CellData());
+            tempCells[i].CellType = type;
         }
-         allCells = allCells.OrderBy(x => Random.value).ToList();
 
-
-       /* int count = grid.childCount;
-        List<Cell> _cells = new List<Cell>(count);
-
-        for (int i = 0; i < count; i++)
-        {
-            _cells.Add(grid.GetChild(i).GetComponent<Cell>());
-        }
-        _cells = _cells.OrderBy(x => Random.value).ToList();
-
-        for (int i = 0; i < count; i++)
-        {
-            Dbg.Log("test: " + i + "/" + _cells[i].CellType + "/" + grid.GetChild(i).GetComponent<Cell>().CellType, Color.yellow);
-            grid.GetChild(i).GetComponent<Cell>().InitCell(_cells[i].CellType);
-            Dbg.Log("test: " + _cells[i].CellType + "/" + grid.GetChild(i).GetComponent<Cell>().CellType, Color.yellow);
-        }*/
-
-
-
-        /* for (int i = 0; i < allCells.Count; i++)
-        {
-            Dbg.Log("checkType: " + i + "/" + allCells[i].CellType, Color.magenta);
-        }
+        tempCells = tempCells.OrderBy(x => Random.value).ToList();
 
         for (int i = 0; i < allCells.Count; i++)
         {
-            Dbg.Log("test: " + i + "/" + allCells[i].CellType + "/" + grid.GetChild(i).GetComponent<Cell>().CellType, Color.yellow);
-            grid.GetChild(i).GetComponent<Cell>().InitCell(allCells[i].CellType);
-            Dbg.Log("test: " + "/" + allCells[i].CellType + "/" + grid.GetChild(i).GetComponent<Cell>().CellType, Color.yellow);
-        }*/
+            allCells[i].InitCell(tempCells[i]);
+        }
+        tempCells.Clear();
     }
 
     #region Checks
@@ -85,23 +73,45 @@ public class CellsManager : Singleton<CellsManager>
 
     private IEnumerator CheckTwins()
     {
-        if (firstSelected.CellType == secondSelected.CellType)
+        yield return null;
+        if(firstSelected.CellData.CellType == secondSelected.CellData.CellType)
+       // if(firstSelected.CellData.Equals(secondSelected.CellData))
         {
             firstSelected.IsSelected = true;
             secondSelected.IsSelected = true;
             firstSelected.ActiveButton(false);
             secondSelected.ActiveButton(false);
-            //проверка конца игры
+            CheckWinGame();//проверка конца игры
         }
         else
         {
             yield return GameCore.yield.WaitFor(1f);
             StartCoroutine(firstSelected.RotateBack());
-            StartCoroutine(secondSelected.RotateBack());
+            yield return StartCoroutine(secondSelected.RotateBack());
         }
-        yield return null;
         ClearSelected();
         ActiveButtons(true);
+    }
+
+    private void CheckWinGame()
+    {
+        for (int i = 0; i < allCells.Count ; i++)
+        {
+            if (!allCells[i].IsSelected)
+            {
+                return;
+            }
+        }
+        WinGameAction();
+    }
+
+    private void WinGameAction()
+    {
+        mainTimer.StopTimer();
+        var saveNewTime = timeGame - mainTimer.Timer;
+        GameCore.windows.OpenWindow<GoodJobWindow>().Init(saveNewTime);
+        BestScoreManager.SaveNewScore(saveNewTime);
+        //сохранение времени
     }
 
     private void ActiveButtons(bool active)
@@ -131,6 +141,7 @@ public class CellsManager : Singleton<CellsManager>
         {
             StartCoroutine(allCells[i].RotateBack());
         }
+        mainTimer.StartTimer(timeGame, () => { GameCore.windows.OpenWindow<GameOverWindow>(); }); // окно проигрыша при конце времени
         ActiveButtons(true);
     }
 }

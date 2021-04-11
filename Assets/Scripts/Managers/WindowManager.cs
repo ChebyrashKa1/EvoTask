@@ -43,17 +43,12 @@ public class WindowManager : Singleton<WindowManager>
         //new window
         for (int i = 0; i < listWindows.Count; i++)
         {
-            //Debug.Log("search! for:" + listWindows[i]);
             if (listWindows[i].TryGetComponent<T>(out _))
             {
-                //Debug.Log("search!");
-                var el = Instantiate(listWindows[i], canvasTransfrom);//.GetComponent<IWindowManager>();
-                createdWindows.Add(el);
-                //overlayWindows.Remove(el);
-                el.gameObject.SetActive(false);
-
-                //(el as MonoBehaviour).gameObject.SetActive(false);
-                return el;
+                var list = Instantiate(listWindows[i], canvasTransfrom);
+                createdWindows.Add(list);
+                list.gameObject.SetActive(false);
+                return list;
             }
         }
         Dbg.Log("Window open Error!", Color.red);

@@ -4,11 +4,12 @@ public static class GameCore
 {
     public static WindowManager     windows         => WindowManager.Instance;
     public static InputControl      input           => InputControl.Instance;
-    public static ScenesManager     scenes          => ScenesManager.Get();
     public static UtilsYield        yield           => UtilsYield.Get();
     public static EnumUtils         enumUtils       => EnumUtils.Get();
     public static CellsManager      cells           => CellsManager.Instance;
     public static IconsManager      icons           => IconsManager.Instance;
+    public static UpdateManager     updater         => UpdateManager.Instance;
+    public static BestScoreManager  scoreManager    => BestScoreManager.Get();
 
     public static void SetAlpha(this UnityEngine.UI.Image self, float newAlpha)
     {

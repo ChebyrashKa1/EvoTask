@@ -10,18 +10,19 @@ public class Cell : MonoBehaviour
     [SerializeField] private Image          iconCell;
     [SerializeField] private Transform      thisTransform;
 
+    private static float fullDegrees = 179.0f;
+    private static float halfDegrees = 90.0f;
     private static float duration = 0.5f;
-    private CellType cellType;
-    private bool isSelected;
-
-    public CellType CellType => cellType;
+    private CellData cellData;
+    private bool isSelected = false;
 
     public bool IsSelected { get => isSelected; set => isSelected = value; }
+    public CellData CellData => cellData;
 
-    public void InitCell(CellType newCell)
+    public void InitCell(CellData newCellData)
     {
-        cellType = newCell;
-        iconCell.sprite = GameCore.icons.GetCellIcon(cellType);
+        cellData = newCellData;
+        iconCell.sprite = GameCore.icons.GetCellIcon(cellData.CellType);
         //RotateForward();
     }
 
@@ -33,7 +34,7 @@ public class Cell : MonoBehaviour
 
     public IEnumerator RotateBack()
     {
-        float startRotation = 360.0f; //thisTransform.eulerAngles.y;
+        float startRotation = fullDegrees; //thisTransform.eulerAngles.y;
         float endRotation = 0.0f;
         float t = 0.0f;
         bool swapIcon = false;
@@ -43,7 +44,7 @@ public class Cell : MonoBehaviour
             t += Time.deltaTime;
             float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration);// % 179.0f;
             thisTransform.eulerAngles = new Vector3(thisTransform.eulerAngles.x, yRotation, thisTransform.eulerAngles.z);
-            if (yRotation <= 180.0f && !swapIcon)
+            if (yRotation <= halfDegrees && !swapIcon)
             {
                 swapIcon = true;
                 iconEmpty.SetActive(true);
@@ -57,22 +58,21 @@ public class Cell : MonoBehaviour
     public IEnumerator RotateForward()
     {
         float startRotation = thisTransform.eulerAngles.y;
-        float endRotation = 360.0f;
+        float endRotation = fullDegrees;
         float t = 0.0f;
         bool swapIcon = false;
 
         while (t < duration)
         {
             t += Time.deltaTime;
-            float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 360.0f;
+            float yRotation = Mathf.Lerp(startRotation, endRotation, t / duration) % 180;
             thisTransform.eulerAngles = new Vector3(thisTransform.eulerAngles.x, yRotation, thisTransform.eulerAngles.z);
-            if (yRotation >= 180.0f && !swapIcon)
+            if (yRotation >= halfDegrees && !swapIcon)
             {
                 swapIcon = true;
                 iconEmpty.SetActive(false);
                 iconCell.gameObject.SetActive(true);
             }
-            Dbg.Log("RotateForward: " + yRotation, Color.green);
             yield return null;
         }
     }
@@ -82,16 +82,4 @@ public class Cell : MonoBehaviour
         if(!isSelected)
             btnCell.interactable = active;
     }
-}
-
-public enum CellType
-{
-    Empty   = 0,
-    Coin    = 1,
-    Hand    = 2,
-    Horse   = 3,
-    Lion    = 4,
-    Eagle   = 5,
-    Medusa  = 6,
-    Bull    = 7,
 }

@@ -15,7 +15,7 @@ public class BestScoreWindow : MonoBehaviour, IWindow
     public void OpenWindow()
     {
         testSave();
-        LoadScore();
+        Init();
         gameObject.SetActive(true);
     }
     #endregion
@@ -23,7 +23,7 @@ public class BestScoreWindow : MonoBehaviour, IWindow
     #region Test
     private void testSave()
     {
-        PlayerPrefs.SetInt(RecordPlace.First.ToString(), 15); 
+        //PlayerPrefs.SetInt(RecordPlace.First.ToString(), 15); 
     }
     public void testClear()
     {
@@ -31,25 +31,18 @@ public class BestScoreWindow : MonoBehaviour, IWindow
     }
     #endregion
 
-    private void LoadScore()
+    private void Init()
     {
-        //расширения для енама, проход по пп с ключами
-        var recordPlaces = GameCore.enumUtils.GetValues<RecordPlace>();
-        string timerValue = "";
+        List<int> recordPlaces = new List<int>(BestScoreManager.GetSummaryScores());
+
+        for (int i = 0; i < timerLabels.Count; i++)
+        {
+            timerLabels[i].UpdateStaticTime(0); //default value
+        }
+
         for (int i = 0; i < recordPlaces.Count; i++)
         {
-            if (PlayerPrefs.HasKey(recordPlaces[i].ToString()))
-                timerValue = PlayerPrefs.GetInt(recordPlaces[i].ToString()).ToString();
-            else
-                timerValue = "--:--";
-            timerLabels[i].UpdateTimer(timerValue);
+            timerLabels[i].UpdateStaticTime(recordPlaces[i]);
         }
-    }
-
-    public enum RecordPlace
-    {
-        First   = 1,
-        Second  = 2,
-        Third   = 3,
     }
 }

@@ -32,7 +32,7 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         if (Application.isPlaying)
             Destroy(this);
-        else
+        else   
             DestroyImmediate(this);
     }
 }

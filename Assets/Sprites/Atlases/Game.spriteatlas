@@ -60,6 +60,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 526b73bd4862df34592163e8065d5a5d, type: 3}
   - {fileID: 21300000, guid: 9d451a5e370172b4c922fa48862cd377, type: 3}
   - {fileID: 21300000, guid: 7b121c7ecf98b54478a1c4b988bef9a3, type: 3}
+  - {fileID: 21300000, guid: a131b4aed099bd94e9d2333ddd34a0fe, type: 3}
   - {fileID: 21300000, guid: 27a850ef8a43b45489f5940e290c99b3, type: 3}
   m_PackedSpriteNamesToIndex:
   - btn_restart
@@ -76,6 +77,7 @@ SpriteAtlas:
   - bg_game
   - cell_game_4
   - btn_main_menu
+  - Square
   - popup_game_over
   m_Tag: Game
   m_IsVariant: 0

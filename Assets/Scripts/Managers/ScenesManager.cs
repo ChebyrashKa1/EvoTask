@@ -1,16 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 
-public class ScenesManager : ASingleton<ScenesManager>
+public class ScenesManager
 {
-    public void LoadNewScene(int index)
+    public static SceneType GetActiveScene()
+    {
+        return (SceneType)SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public static void LoadNewScene(SceneType type)
+    {
+        SceneManager.LoadScene((int)type);
+    }
+    public static void LoadNewScene(int index)
     {
         SceneManager.LoadScene(index);
     }
-    public void LoadNewScene(string name)
+    public static void LoadNewScene(string name)
     {
         SceneManager.LoadScene(name);
     }
+}
+public enum SceneType
+{
+    Load = 0,
+    Game = 1,
 }
