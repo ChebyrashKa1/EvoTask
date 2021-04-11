@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -242,7 +242,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 300}
+  m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7546994029850818907
 CanvasRenderer:
@@ -316,7 +316,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 300}
+  m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &470985435384282981
 CanvasRenderer:
@@ -657,12 +657,12 @@ PrefabInstance:
     - target: {fileID: 985213450441683116, guid: 50858846046d06841932773ecf058a95,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 600
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 985213450441683116, guid: 50858846046d06841932773ecf058a95,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 200
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 985213450441683116, guid: 50858846046d06841932773ecf058a95,
         type: 3}
@@ -732,7 +732,7 @@ PrefabInstance:
     - target: {fileID: 3870392963680467621, guid: 50858846046d06841932773ecf058a95,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -325
+      value: -175
       objectReference: {fileID: 0}
     - target: {fileID: 3870392963680467621, guid: 50858846046d06841932773ecf058a95,
         type: 3}

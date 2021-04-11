@@ -12,7 +12,7 @@ public class CellsManager : Singleton<CellsManager>
     private List<CellData> tempCells;
     private Cell firstSelected;
     private Cell secondSelected;
-    private static int timeGame = 60;
+    private const int timeGame = 60;
 
     public Cell FirstSelected { get => firstSelected; set => firstSelected = value; }
     public Cell SecondSelected { get => secondSelected; set => secondSelected = value; }
@@ -23,12 +23,6 @@ public class CellsManager : Singleton<CellsManager>
         InitCells();
         mainTimer.UpdateStaticTime(timeGame);
         StartCoroutine(TwoSecondRotate());
-    }
-
-    private void InitTimer()
-    {
-        //mainTimer.UpdateStaticTime(timeGame);
-        mainTimer.StartTimer(timeGame, () => { GameCore.windows.OpenWindow<GameOverWindow>(); }); // окно проигрыша при конце времени
     }
 
     private void InitCells() //init sort 
@@ -75,12 +69,12 @@ public class CellsManager : Singleton<CellsManager>
     {
         yield return null;
         if(firstSelected.CellData.CellType == secondSelected.CellData.CellType)
-       // if(firstSelected.CellData.Equals(secondSelected.CellData))
         {
             firstSelected.IsSelected = true;
             secondSelected.IsSelected = true;
             firstSelected.ActiveButton(false);
             secondSelected.ActiveButton(false);
+            yield return GameCore.yield.WaitFor(0.5f);
             CheckWinGame();//проверка конца игры
         }
         else
@@ -111,7 +105,6 @@ public class CellsManager : Singleton<CellsManager>
         var saveNewTime = timeGame - mainTimer.Timer;
         GameCore.windows.OpenWindow<GoodJobWindow>().Init(saveNewTime);
         BestScoreManager.SaveNewScore(saveNewTime);
-        //сохранение времени
     }
 
     private void ActiveButtons(bool active)
@@ -144,4 +137,16 @@ public class CellsManager : Singleton<CellsManager>
         mainTimer.StartTimer(timeGame, () => { GameCore.windows.OpenWindow<GameOverWindow>(); }); // окно проигрыша при конце времени
         ActiveButtons(true);
     }
+
+
+    #region TimerPause
+    public void ActiveTimer()
+    {
+        mainTimer.StartTimer(mainTimer.Timer, () => { GameCore.windows.OpenWindow<GameOverWindow>(); }); // окно проигрыша при конце времени
+    }
+    public void StopTimer()
+    {
+        mainTimer.StopTimer();
+    }
+    #endregion
 }

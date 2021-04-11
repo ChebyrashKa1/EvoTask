@@ -748,7 +748,7 @@ PrefabInstance:
     - target: {fileID: 985213450441683116, guid: 50858846046d06841932773ecf058a95,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 985213450441683116, guid: 50858846046d06841932773ecf058a95,
         type: 3}
@@ -1302,6 +1302,7 @@ GameObject:
   - component: {fileID: 917917527}
   - component: {fileID: 917917526}
   - component: {fileID: 917917525}
+  - component: {fileID: 917917528}
   m_Layer: 5
   m_Name: btnPause
   m_TagString: Untagged
@@ -1419,6 +1420,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 917917523}
   m_CullTransparentMesh: 0
+--- !u!114 &917917528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917917523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4229094bba530f34f94810f32b7c6c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTime: 0.15
+  sizeEffect: 0.9
+  scrollComponent: 0
+  moveToStatrSize: 0
+  sSize: {x: 1, y: 1}
 --- !u!1001 &924622109
 PrefabInstance:
   m_ObjectHideFlags: 0

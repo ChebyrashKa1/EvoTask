@@ -34,10 +34,9 @@ public class TimerLabel : MonoBehaviour
         GameCore.updater.secondTick += UpdateTimer;
     }
 
-    public void StopTimer(bool makeFinishAction = false, int newTime = 0)
+    public void StopTimer(bool makeFinishAction = false)
     {
         GameCore.updater.secondTick -= UpdateTimer;
-        //txtTimer.SetText(UpdateManager.TimeToStr(newTime));
         if (makeFinishAction)
         {
             finishAction?.Invoke();
@@ -58,10 +57,5 @@ public class TimerLabel : MonoBehaviour
     public void CleanSelf()
     {
         txtTimer.SetText("");
-    }
-    private void OnDestroy()
-    {
-        //if(ScenesManager.GetActiveScene() == SceneType.Game)
-         //   GameCore.updater.secondTick -= UpdateTimer;
     }
 }

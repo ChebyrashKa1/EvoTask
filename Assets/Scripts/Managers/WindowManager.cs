@@ -19,8 +19,8 @@ public class WindowManager : Singleton<WindowManager>
     {
         var window = Get<T>();
 
-        if (currentWindow != null)
-            currentWindow.CloseWindow();
+       // if (currentWindow != null)
+        //    currentWindow.CloseWindow();
         currentWindow = window.GetComponent<IWindow>();
         currentWindow.OpenWindow();
         window.TryGetComponent(out T win);

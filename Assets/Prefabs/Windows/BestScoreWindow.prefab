@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5305690636632227462}
   - component: {fileID: 5993636364241304619}
+  - component: {fileID: 8780681859689552403}
+  - component: {fileID: 7351617884704038475}
   m_Layer: 5
   m_Name: BestScoreWindow
   m_TagString: Untagged
@@ -55,6 +57,43 @@ MonoBehaviour:
   - {fileID: 1175543125631808869}
   - {fileID: 8739569770123120910}
   - {fileID: 7505249836523720472}
+--- !u!222 &8780681859689552403
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514905463508807065}
+  m_CullTransparentMesh: 0
+--- !u!114 &7351617884704038475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514905463508807065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a131b4aed099bd94e9d2333ddd34a0fe, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3336177682385477113
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +482,7 @@ GameObject:
   - component: {fileID: 4705043059880244996}
   - component: {fileID: 2438174116927549630}
   - component: {fileID: 6957765422868219339}
+  - component: {fileID: 1430023276637322805}
   m_Layer: 5
   m_Name: btnBack
   m_TagString: Untagged
@@ -560,6 +600,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1430023276637322805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5943961168475268998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4229094bba530f34f94810f32b7c6c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectTime: 0.15
+  sizeEffect: 0.9
+  scrollComponent: 0
+  moveToStatrSize: 0
+  sSize: {x: 1, y: 1}
 --- !u!1001 &1175257488242865570
 PrefabInstance:
   m_ObjectHideFlags: 0

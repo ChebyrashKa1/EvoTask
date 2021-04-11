@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class EnumUtils : ASingleton<EnumUtils>
 {
-    [RuntimeInitializeOnLoadMethod] public static void SelfAwake() { Get(); }
-
     public List<T> GetValues<T>()
     {
         var vals = Enum.GetValues(typeof(T));

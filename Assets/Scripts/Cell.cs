@@ -10,9 +10,10 @@ public class Cell : MonoBehaviour
     [SerializeField] private Image          iconCell;
     [SerializeField] private Transform      thisTransform;
 
-    private static float fullDegrees = 179.0f;
-    private static float halfDegrees = 90.0f;
-    private static float duration = 0.5f;
+    private const float fullDegrees = 179.0f;
+    private const float halfDegrees = 90.0f;
+    private const float duration = 0.5f;
+
     private CellData cellData;
     private bool isSelected = false;
 

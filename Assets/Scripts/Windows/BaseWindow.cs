@@ -3,12 +3,12 @@
 public class BaseWindow : MonoBehaviour, IWindow
 {
     #region Window
-    public void CloseWindow()
+    public virtual void CloseWindow()
     {
         gameObject.SetActive(false);
     }
 
-    public void OpenWindow()
+    public virtual void OpenWindow()
     {
         gameObject.SetActive(true);
     }

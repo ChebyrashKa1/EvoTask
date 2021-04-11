@@ -6,12 +6,6 @@ public class CellData
 {
     private CellType cellType;
     public CellType CellType { get => cellType; set => cellType = value; }
-
-    //compare method
-    /*public override bool Equals(object obj)
-    {
-        return (obj as CellData).CellType == this.CellType;
-    }*/
 }
 
 public enum CellType

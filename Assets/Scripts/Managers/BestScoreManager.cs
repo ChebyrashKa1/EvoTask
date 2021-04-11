@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BestScoreManager : ASingleton<BestScoreManager>
+public class BestScoreManager
 {
     public static void SaveNewScore(int newScore)
     {
@@ -19,7 +19,13 @@ public class BestScoreManager : ASingleton<BestScoreManager>
     private static void SaveScores(List<int> newValues)
     {
         var recordPlaces = GameCore.enumUtils.GetValues<RecordPlace>();
-        for (int i = 0; i < recordPlaces.Count; i++)
+
+        int count = recordPlaces.Count;
+        if (newValues.Count <= recordPlaces.Count)
+            count = newValues.Count;
+
+        //проверка если новых значений больше то использовать каунт 3 (места под рекорд), иначе использовать каунт нью вэлью
+        for (int i = 0; i < count; i++)
         {
             PlayerPrefs.SetInt(recordPlaces[i].ToString(), newValues[i]);
         }
